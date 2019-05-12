@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    .parent {
+      height: 500px;
+      border: 1px solid red;
+    }
+    .child {
+      display: inline-block;
+      vertical-align: middle;
+      border: 1px solid blue;
+    }
+    .parent:before {
+      content:'before';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="child">
+      child
+    </div>
+  </div>
+</body>
+</html>
