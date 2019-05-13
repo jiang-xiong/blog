@@ -21,7 +21,7 @@ var b = shallowCopy(a)
 b.name = 'b'
 b.obj.age = 20
 // b 和 a 的 age 指向的是同一块内存
-// 他们会随一方的改变而改变
+// 他们会一起改变
 console.log(a)
 console.log(b)
 

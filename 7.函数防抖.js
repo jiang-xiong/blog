@@ -16,4 +16,4 @@ var debounce = function (callBack, interval) {
 
 document.addEventListener('scroll', debounce(function () {
   console.log('scroll')
-}, 2000))
+}, 1000))

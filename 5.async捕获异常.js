@@ -1,22 +1,26 @@
-// 创建拥有 promise 功能的函数
-var rejectAfter2Seconds = function () {
-  // Promise 接受一个异步函数
-  // 这个异步函数接收 resolve 和 reject 两个函数作为参数
+// 创建 promise
+var hello1 = function () {
   return new Promise(function (resolve, reject) {
-    setTimeout(function() {
-      // resolve('成功')
-      reject('失败')
-    }, 2000)
+    setTimeout(function () {
+      // resolve('resolve hello1')
+      reject('reject hello1')
+    }, 100)
   })
 }
-
-var asyncCall = async function() {
+// promise 在异步函数中使用
+var main = async function () {
+  // await 用于等待异步函数执行完成
   try {
-    var result = await rejectAfter2Seconds()
-    console.log('result', result)
+    var result1 = await hello1()
+    // 如果 Promise 状态为 rejected 则报错，无法向下执行
+    // 为解决报错问题使用 try
+    console.log(result1)
+    console.log('after result1')
   } catch (e) {
+    // e 为 reject 内的值
     console.log('error occurs', e)
+  } finally {
+
   }
 }
-
-asyncCall()
+main()

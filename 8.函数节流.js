@@ -17,7 +17,20 @@ var throttle = function (callBack, interval) {
     }
   }
 }
-
+var throttle = function (callBack, interval) {
+  var cd = true
+  return function () {
+    if (cd === false) {
+      return
+    } else if (cd === true) {
+      callBack()
+      cd = false
+      setTimeout(function () {
+        cd = true
+      }, interval)
+    }
+  }
+}
 document.addEventListener('scroll', throttle(function () {
   console.log('scroll')
-}, 3000))
+}, 2000))

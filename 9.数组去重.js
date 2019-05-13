@@ -1,5 +1,4 @@
 var a = [4, 5, 6, 4 , 5]
-
 var hashTeb = {}
 for (var i = 0; i < a.length; i++) {
   if (a[i] in hashTeb) {
@@ -8,6 +7,12 @@ for (var i = 0; i < a.length; i++) {
     hashTeb[a[i]] = true
   }
 }
-console.log(Object.keys(hashTeb))
+var keys = Object.keys(hashTeb)
+for (var i = 0; i < keys.length; i++) {
+  keys[i] = Number(keys[i])
+}
+console.log(keys)
 
-Array.from(new Set(a))
+var a = [4, 5, 6, 4 , 5]
+var b = Array.from(new Set(a))
+console.log(b)
