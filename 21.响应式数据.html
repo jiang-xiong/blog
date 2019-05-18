@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div>
+        <p>value ->
+          <span id='value'></span>
+        </p>
+    </div>　
+  </body>
+  <script>
+    var o = {}
+    Object.defineProperty(o, 'key', {
+        get: function(){
+            return document.getElementById('value').innerHTML
+        },
+        set: function(value){
+            document.getElementById('key').innerHTML = value
+        },
+    })
+    // o.value = '233'
+  </script>
+</html>
