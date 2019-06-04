@@ -3,7 +3,7 @@ var p5 = new Promise(function (resolve, reject) {
     resolve('resolve p5')
   }, 500)
 })
-var p5 = new Promise(function (resolve, reject) {
+var p6 = new Promise(function (resolve, reject) {
   setTimeout(function () {
     reject('reject p6')
   }, 100)
