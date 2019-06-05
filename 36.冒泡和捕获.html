@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .a {
+        background: lightblue;
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="a">
+      A
+    </div>
+  </body>
+  <script>
+    var a = document.querySelector('.a')
+    a.addEventListener('click', function(event){
+      console.log('Bubble click a')
+    })
+    a.addEventListener('click', function(event){
+      console.log('capture click a')
+    }, true)
+
+  </script>
+</html>
