@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      child name: {{child}}
+      <child v-on:say='greeting("child", $event)'></child>
+    </div>
+  </body>
+  <script>
+    Vue.component('child', {
+      template: `
+        <div>
+          child
+          <button v-on:click='$emit("say", "Jack")'>greeting</button>
+        </div>
+      `
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        child: '',
+      },
+      methods: {
+        greeting: function (key, value) {
+          this[key] = value
+        },
+      }
+    })
+  </script>
+</html>
