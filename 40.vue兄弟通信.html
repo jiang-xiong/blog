@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <brother1></brother1>
+      <brother2></brother2>
+    </div>
+  </body>
+  <script>
+    let eventHub = new Vue()
+    Vue.prototype.$eventHub = eventHub
+    Vue.component('brother1', {
+      template: `
+        <div>
+          brother1
+          <button v-on:click='say1'>say</button>
+        </div>
+      `,
+      methods: {
+        say1: function () {
+          this.$eventHub.$emit('say', 'i am brother1')
+        }
+      }
+    })
+    Vue.component('brother2', {
+      data: function () {
+        return {
+          message: '',
+        }
+      },
+      template: `
+        <div>
+          brother2 hear: {{message}}
+        </div>
+      `,
+      created() {
+        this.$eventHub.$on('say',(data) => {
+          this.message = data
+        })
+      }
+    })
+    new Vue({
+      el: '#app',
+      })
+  </script>
+</html>
