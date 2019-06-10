@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.1.0/dist/vuex.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{computedMessage}}</h1>
+      <h1>{{computedCount}}</h1>
+      <button v-on:click='increase'>plus</button>
+    </div>
+  </body>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        message: 'hello vuex',
+        count: 0,
+      },
+      // 同步
+      mutations: {
+        increase(state, payload) {
+          state.count += payload
+        },
+      },
+      // 异步
+      actions: {
+        asyncIncrease(state, payload) {
+          setTimeout(function () {
+            state.commit('increase', payload)
+          }, 1000)
+        },
+      },
+      getters: {
+        messageGettre() {
+          return store.state.message.toUpperCase()
+        },
+      },
+    })
+    const app = new Vue({
+      el: '#app',
+      computed: {
+        computedMessage() {
+          return store.getters.messageGettre
+        },
+        computedCount() {
+          return store.state.count
+        },
+      },
+      methods: {
+        increase: function () {
+          // 异步
+          store.dispatch('asyncIncrease', 20)
+          // 同步
+          // store.commit('increase', 10)
+        },
+      },
+    })
+  </script>
+</html>
