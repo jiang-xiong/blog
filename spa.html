@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="utils.js"></script>
+    <style>
+      .page {
+        width: 300px;
+        height: 300px;
+        display: none;
+      }
+      .new {
+        background:  lightblue;
+      }
+      .info {
+        background:  lightgray;
+      }
+      .active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="id-button-new">new</button>
+    <button id="id-button-info">info</button>
+    <div class="page new active">
+      new
+    </div>
+    <div class="page info">
+      info
+    </div>
+  </body>
+  <script>
+    var bindNew = function () {
+      var newButton = e('#id-button-new')
+      bindEvent(newButton, 'click', function () {
+        showPage('.new')
+        pushState('new')
+      })
+    }
+
+    bindNew()
+
+    var bindInfo = function () {
+      var infoButton = e('#id-button-info')
+      bindEvent(infoButton, 'click', function () {
+        showPage('.info')
+        pushState('info')
+
+      })
+    }
+
+    bindInfo()
+
+    var pushState = function(className) {
+        var pageName = className
+        var url = 'spa.html?page=' + pageName
+        var state = {
+            page: className,
+        }
+        history.pushState(state, 'title', url)
+        document.title = pageName
+    }
+
+    var showPage = function(className) {
+      var div = e(className)
+      removeClassAll('active')
+      toggleClass(div, 'active')
+    }
+
+    var initApp = function() {
+        var query = location.search
+        var [k, v] = query.slice(1).split('=')
+        var page = 'new'
+        var validPages = ['new', 'info']
+        if (k == 'page') {
+            if (validPages.includes(v)) {
+                page = v
+            }
+        }
+        var className = '.' + page
+        showPage(className)
+    }
+
+    initApp()
+
+    window.addEventListener("popstate", function(e) {
+        var state = e.state
+        var pageName = state.page
+        var className = '.' + pageName
+        showPage(className)
+    })
+  </script>
+</html>
